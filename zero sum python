@@ -1,0 +1,25 @@
+hero.summon("soldier")
+while True:
+    enemies = hero.findEnemies()
+    nearestEnemy = hero.findNearest(enemies)
+    
+    # Your hero can collect coins and summon troops.
+    if hero.gold > hero.costOf("soldier"):
+        hero.summon("soldier")
+    # She also commands your allies in battle.
+    friends = hero.findFriends()
+    enemies = hero.findEnemies()
+    for friend in friends:
+        friends = hero.findFriends()
+        if friend.type == "soldier":
+            hero.command(friend, "attack", friend.findNearest(enemies))
+        if friend.type == "peasant":
+            hero.command(friend, "move", item.pos)
+    
+    # Use your hero's abilities to turn the tide.
+    item = hero.findNearestItem()
+    if item and hero.isReady("goldstorm"):
+        hero.cast("goldstorm")
+    if item:
+        item = hero.findNearestItem()
+        hero.move(item.pos)
